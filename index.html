@@ -24,14 +24,13 @@
 
 
 
-    <div>
+    <div class = "col-md-12">
         <h1> Wins: <span id="wins"></span></h1>
         <h2>Can you guess the word?: <spand id="wordGuess"></span></h2>
         <p>Number of guesses remaining: <span id="guessCounter"></span></p>
         <p>Incorrect Guesses:</p>
         <p id="guesses"></p>
     </div>
-
 
 
 
@@ -105,6 +104,7 @@
                         underScore.push("_");
                     }
                     document.getElementById("wordGuess").innerHTML = displayedString;
+                    document.getElementById("guessCounter").innerHTML = guessCounter;
                 }
                 console.log(userLetter);
                 console.log(underScore);
