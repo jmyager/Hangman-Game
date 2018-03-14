@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <title>Hangman Game</title>
+    <title>LOTR Hangman Game</title>
 
 </head>
 
 <body>
 
     <div class="jumbotron">
-        <h1 class="display-4">Hangman</h1>
+        <h1 class="display-4">Lord of the Ring's Hangman</h1>
         <p class="lead">Press any key to get started.</p>
     </div>
 
@@ -25,10 +25,11 @@
 
 
     <div>
-        <p> Wins: <span id="wins"></span></p>
-        <p>Display random word from array: </p>
-        <p id="wordGuess"></p>
-        <p>Number of guesses remaining: <span id="guesses"></span></p>
+        <h1> Wins: <span id="wins"></span></h1>
+        <h2>Can you guess the word?: <spand id="wordGuess"></span></h2>
+        <p>Number of guesses remaining: <span id="guessCounter"></span></p>
+        <p>Incorrect Guesses:</p>
+        <p id="guesses"></p>
     </div>
 
 
@@ -36,10 +37,8 @@
 
     <script>
 
-
-        // Computer picks random word for game
         // Create Array of Words
-        var wordBank = ["aragorn", "frodo", "gandalf"];
+        var wordBank = ["aragorn", "frodo", "gandalf", "legolas", "gimli", "golem", "sauron", "gondor", "rohan", "theshire", "samwise", "merry", "pippin", "sauroman", "balrog", "mordor", "rivendale", "galadriel", "boromir", "bilbo"];
 
         // Choose word randomly
         var randNum = Math.floor(Math.random() * wordBank.length);
@@ -98,6 +97,7 @@
                     chosenWord = wordBank[randNum];
                     underScore = [];
                     guesses = [];
+                    document.getElementById("guesses").innerHTML = guesses;
                     guessCounter = 10;
                     displayedString = "";
                     for (var i = 0; i < chosenWord.length; i++) {
@@ -109,25 +109,35 @@
                 console.log(userLetter);
                 console.log(underScore);
             }
-            // If users key is not within the chosen word, add it to guesses and decrease the guess counter by 1
+            // If user's key is not within the chosen word, add it to guesses and decrease the guess counter by 1
             else {
-                guesses.push(userLetter);
-                guessCounter--;
-                document.getElementById("guesses").innerHTML = guessCounter;
-
-                // If user runs out of guesses, game is reset without increasing winCounter
-                if (guessCounter === 0) {
+                //Check to see if user's key has already been used.
+                if (guesses.indexOf(userLetter) !== -1) {
+                }
+                else {
+                    guesses += userLetter + " ";
+                    guessCounter--;
+                    document.getElementById("guessCounter").innerHTML = guessCounter;
+                    document.getElementById("guesses").innerHTML = guesses;
+                    console.log(guesses);
+        
+                    // If user runs out of guesses, game is reset without increasing winCounter
+                    if (guessCounter === 0) {
                     randNum = Math.floor(Math.random() * wordBank.length);
                     chosenWord = wordBank[randNum];
                     underScore = [];
                     guesses = [];
                     guessCounter = 10;
+                    displayedString = "";
                     for (var i = 0; i < chosenWord.length; i++) {
                         displayedString += "_ ";
                         underScore.push("_");
                     }
                     document.getElementById("wordGuess").innerHTML = displayedString;
                 }
+                }
+
+                
                 console.log("false");
                 console.log(guesses);
                 console.log(guessCounter);
