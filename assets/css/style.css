@@ -23,6 +23,8 @@ body {
     background: rgba(0,0,0,.5);
     color: white;
     border: 1px solid white;
+    box-sizing: border-box;
+    padding: 20px;
 }
 
 .mainContent h1 {
